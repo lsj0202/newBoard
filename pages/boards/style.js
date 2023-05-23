@@ -162,4 +162,10 @@ export const Complete = styled.button`
   height: 5vh;
   border: none;
   background-color: #FFD600;
+  &:hover{
+  cursor: pointer;
+  }
+  &:active{
+    background-color: orange;
+  }
 `
