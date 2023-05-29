@@ -1,7 +1,58 @@
-import React from 'react'
 import * as S from './style'
+import { useState } from 'react'
 
 export default function index() {
+  const [writer, setWriter] = useState('');
+  const [password, setPassword] = useState('');
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
+  const [address, setAddress] = useState('');
+
+  const [writerError, setWriterError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [titleError, setTitleError] = useState('');
+  const [contentsError, setContentsError] = useState('');
+  const [complete, setComplete] = useState('');
+
+  const onChangeWriter = (e) => {
+    const write = e.target.value;
+    setWriter(write);
+    console.log(write);
+  }
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+    console.log(password);
+  }
+
+  const onChangeTitle = (e) => {
+    const title = e.target.value;
+    setTitle(title);
+    console.log(title);
+  }
+
+  const onChangeContents = (e) => {
+    const content = e.target.value;
+    setContents(content);
+    console.log(content);
+  }
+
+  const onClickSubmit = () => {
+    if(!writer){
+      setWriterError('이름을 작성해 주세요.');
+      console.log(writerError);
+    } if(!password){
+      setPasswordError('비밀번호를 작성해 주세요.');
+    } if(!title){
+      setTitleError('제목을 작성해 주세요.');
+    } if(!contents){
+      setContentsError('내용을 작성해 주세요.');
+    } if(writer && password && title && contents){
+      setComplete('게시글이 등록되었습니다.');
+    }
+  }
+
   return (
     <S.Container>
       <S.Doc>
@@ -11,23 +62,27 @@ export default function index() {
         <S.WriteDiv>
           <S.Tag>
             <S.Text>작성자</S.Text>
-            <S.Inputed type='text' placeholder='이름을 작성해주세요.'/>
+            <S.Inputed type='text' placeholder='이름을 작성해주세요.' onChange={onChangeWriter}/>
+            <S.ErrorMessage>{writerError}</S.ErrorMessage>
           </S.Tag>
           <S.Tag>
             <S.Text>비밀번호</S.Text>
-            <S.Inputed type='text' placeholder='비밀번호를 작성해주세요.'/>
+            <S.Inputed type='text' placeholder='비밀번호를 작성해주세요.' onChange={onChangePassword}/>
+            <S.ErrorMessage>{passwordError}</S.ErrorMessage>
           </S.Tag>
         </S.WriteDiv>
         <S.TextDiv>
           <S.Tag2>
             <S.Text>제목</S.Text>
-            <S.Inputed2 type='text' placeholder='제목을 작성해주세요.'/>
+            <S.Inputed2 type='text' placeholder='제목을 작성해주세요.' onChange={onChangeTitle}/>
+            <S.ErrorMessage>{titleError}</S.ErrorMessage>
           </S.Tag2>
         </S.TextDiv>
         <S.TextDiv2>
           <S.Tag2>
             <S.Text>내용</S.Text>
-            <S.Inputed3 type='text' placeholder='내용을 작성해주세요.'/>
+            <S.Inputed3 type='text' placeholder='내용을 작성해주세요.' onChange={onChangeContents}/>
+            <S.ErrorMessage>{contentsError}</S.ErrorMessage>
           </S.Tag2>
         </S.TextDiv2>
         <S.AddressDiv>
@@ -82,7 +137,7 @@ export default function index() {
           </S.Tag2>
         </S.TextDiv3>
         <S.TextDiv2>
-          <S.Complete>
+          <S.Complete onClick={onClickSubmit}>
             등록하기
           </S.Complete>
         </S.TextDiv2>

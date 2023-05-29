@@ -169,3 +169,8 @@ export const Complete = styled.button`
     background-color: orange;
   }
 `
+export const ErrorMessage = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+`
