@@ -1,18 +1,28 @@
 import * as S from './style'
 import { useState } from 'react'
+import { useMutation, gql } from '@apollo/client';
+
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput){
+      _id
+    }
+  }
+`
 
 export default function index() {
+  const [createBoard] = useMutation(CREATE_BOARD);
+
   const [writer, setWriter] = useState('');
   const [password, setPassword] = useState('');
   const [title, setTitle] = useState('');
   const [contents, setContents] = useState('');
-  const [address, setAddress] = useState('');
+  const [complete, setComplete] = useState('');
 
   const [writerError, setWriterError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [titleError, setTitleError] = useState('');
   const [contentsError, setContentsError] = useState('');
-  const [complete, setComplete] = useState('');
 
   const onChangeWriter = (e) => {
     const write = e.target.value;
@@ -38,7 +48,7 @@ export default function index() {
     console.log(content);
   }
 
-  const onClickSubmit = () => {
+  const onClickSubmit = async () => {
     if(!writer){
       setWriterError('이름을 작성해 주세요.');
       console.log(writerError);
@@ -50,6 +60,18 @@ export default function index() {
       setContentsError('내용을 작성해 주세요.');
     } if(writer && password && title && contents){
       setComplete('게시글이 등록되었습니다.');
+      alert('게시글이 등록되었습니다.');
+      const result = await createBoard({
+        variables: {
+          createBoardInput:{
+            writer,
+            password,
+            title,
+            contents,
+          }
+        }
+      })
+      console.log(result);
     }
   }
 
@@ -67,7 +89,7 @@ export default function index() {
           </S.Tag>
           <S.Tag>
             <S.Text>비밀번호</S.Text>
-            <S.Inputed type='text' placeholder='비밀번호를 작성해주세요.' onChange={onChangePassword}/>
+            <S.Inputed type='password' placeholder='비밀번호를 작성해주세요.' onChange={onChangePassword}/>
             <S.ErrorMessage>{passwordError}</S.ErrorMessage>
           </S.Tag>
         </S.WriteDiv>
