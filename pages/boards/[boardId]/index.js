@@ -47,6 +47,9 @@ export default function Boards() {
     alert('목록 삭제가 완료되었습니다!');
     router.push('/boards')
   }
+  const moveToList = () => {
+    router.push('/boards')
+  }
   return (
     <S.Container>
       <S.Doc>
@@ -72,7 +75,7 @@ export default function Boards() {
       </S.Doc>
       <S.ContainterButtons>
         <S.buttons>
-          <S.button>목록으로</S.button>
+          <S.button onClick={moveToList}>목록으로</S.button>
           <S.button onClick={onClickEdit}>수정하기</S.button>
           <S.button onClick={onClickDelete}>삭제하기</S.button>
         </S.buttons>
