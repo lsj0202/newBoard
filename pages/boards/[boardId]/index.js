@@ -27,15 +27,15 @@ export default function Boards() {
 
   const { data } = useQuery(FEAT_BOARD, {
     variables: {
-      boardId: router.query.boardId 
+      boardId: router.query.boardId
     }
   });
   console.log(data);
 
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
-  const onClickEdit = () => {
-
+  const onClickEdit = (e) => {
+    router.push(`${router.query.boardId}/edit`)
   }
   const onClickDelete = async () => {
     const deleteB = await deleteBoard({
