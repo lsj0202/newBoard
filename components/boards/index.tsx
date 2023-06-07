@@ -148,7 +148,7 @@ export default function index(props) {
         <S.TextDiv2>
           <S.Tag2>
             <S.Text>내용</S.Text>
-            <S.Inputed3 type='text' placeholder='내용을 작성해주세요.' onChange={onChangeContents} defaultValue={data?.fetchBoard.contents}/>
+            <S.Inputed3 placeholder='내용을 작성해주세요.' onChange={onChangeContents} defaultValue={data?.fetchBoard.contents}/>
             <S.ErrorMessage>{contentsError}</S.ErrorMessage>
           </S.Tag2>
         </S.TextDiv2>
