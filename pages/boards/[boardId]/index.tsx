@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import * as S from './style'
 import Image from 'next/image'
 import profileIcon from '../../images/profile.svg'
@@ -34,7 +34,7 @@ export default function Boards() {
 
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
-  const onClickEdit = (e) => {
+  const onClickEdit = (e: React.MouseEvent) => {
     router.push(`${router.query.boardId}/edit`)
   }
   const onClickDelete = async () => {

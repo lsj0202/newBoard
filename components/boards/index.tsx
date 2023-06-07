@@ -1,7 +1,8 @@
 import * as S from './style'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { useMutation, gql, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { TextChange } from 'typescript';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -31,37 +32,42 @@ export const FETCH_BOARD = gql`
 `;
 
 export default function index(props) {
+  interface EBoard {
+    boardId: string | number
+    password: string | number
+  }
+  
   const router = useRouter();
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: { boardId: router.query.boardId },
   });
   const [createBoard] = useMutation(CREATE_BOARD);
-  const [editBoard] = useMutation(EDIT_BOARD);
+  const [editBoard] = useMutation<EBoard>(EDIT_BOARD);
 
-  const [writer, setWriter] = useState('');
-  const [password, setPassword] = useState('');
-  const [title, setTitle] = useState('');
-  const [contents, setContents] = useState('');
+  const [writer, setWriter]= useState<string>('');
+  const [password, setPassword] = useState<string | number>('');
+  const [title, setTitle] = useState<string>('');
+  const [contents, setContents] = useState<string>('');
   const [complete, setComplete] = useState('');
 
-  const [writerError, setWriterError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [titleError, setTitleError] = useState('');
-  const [contentsError, setContentsError] = useState('');
+  const [writerError, setWriterError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [titleError, setTitleError] = useState<string>('');
+  const [contentsError, setContentsError] = useState<string>('');
 
-  const onChangeWriter = (e) => {
+  const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
     const write = e.target.value;
     setWriter(write);
   }
 
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
     setPassword(password);
     console.log(password)
   }
 
-  const onChangeTitle = (e) => {
+  const onChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
     setTitle(title);
   }

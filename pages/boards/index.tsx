@@ -16,7 +16,7 @@ const SEARCH = gql`
   }
 `
 export default function index() {
-   const getDate = (date) => {
+   const getDate = (date: string | number) => {
     const _date = new Date(date)
     const yyyy = _date.getFullYear()
     const mm = _date.getMonth() + 1
@@ -43,7 +43,7 @@ export default function index() {
             <S.Writer>작성자</S.Writer>
             <S.Date>날짜</S.Date>
           </S.Container>
-          {data?.fetchBoards.map((data) => (
+          {data?.fetchBoards.map((data: any) => (
             <S.ContainerBody key={data._id}>
               <S.Number>{String(data._id).slice(-4).toUpperCase()}</S.Number>
               <S.Title id={data._id} onClick={moveToBoard}>{data.title}</S.Title>
