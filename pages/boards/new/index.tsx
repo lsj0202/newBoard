@@ -1,5 +1,5 @@
 import React from 'react'
-import NewPage from '../../../components/boards'
+import NewPage from '../../../components/boards/index.tsx'
 
 export default function index() {
   return (
