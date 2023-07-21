@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { TextChange } from "typescript";
@@ -38,7 +38,6 @@ export const FETCH_BOARD = gql`
     }
   }
 `;
-
 export default function index(props) {
   interface EBoard {
     boardId: string | number;
@@ -62,6 +61,16 @@ export default function index(props) {
   const [passwordError, setPasswordError] = useState<string>("");
   const [titleError, setTitleError] = useState<string>("");
   const [contentsError, setContentsError] = useState<string>("");
+
+  useEffect(() => {
+    // Fetch된 데이터가 있을 때만 해당 상태 변수들을 업데이트합니다.
+    if (data?.fetchBoard) {
+      setWriter(data.fetchBoard.writer);
+      setPassword(data.fetchBoard.password);
+      setTitle(data.fetchBoard.title);
+      setContents(data.fetchBoard.contents);
+    }
+  }, [data?.fetchBoard]);
 
   const onChangeWriter = (e: ChangeEvent<HTMLInputElement>) => {
     const write = e.target.value;
@@ -97,7 +106,9 @@ export default function index(props) {
         },
       });
       console.log(data);
-      router.push(`/boards/${router.query.boardId}`);
+      router
+        .push(`/boards/${router.query.boardId}`)
+        .then(() => router.reload());
     } catch (error) {
       alert(error.message);
     }
@@ -129,7 +140,7 @@ export default function index(props) {
             },
           },
         });
-        router.push(`/boards`);
+        router.push(`/boards`).then(() => router.reload());
         console.log(result.data.createBoard._id);
       } catch (error) {
         alert(error.message);
