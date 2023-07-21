@@ -1,8 +1,6 @@
-import React from 'react'
-import NewPage from '../../../components/boards/index.tsx'
+import React from "react";
+import NewPage from "../../../components/boards";
 
 export default function index() {
-  return (
-    <NewPage isEdit={false} />
-  )
+  return <NewPage isEdit={false} />;
 }

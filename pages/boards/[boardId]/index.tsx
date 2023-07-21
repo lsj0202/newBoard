@@ -1,13 +1,13 @@
-import React, { ChangeEvent } from 'react'
-import * as S from './style'
-import Image from 'next/image'
-import profileIcon from '../../images/profile.svg'
-import { gql, useQuery, useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
+import React, { ChangeEvent } from "react";
+import * as S from "./style";
+import Image from "next/image";
+import profileIcon from "../../images/profile.svg";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const FEAT_BOARD = gql`
   query fetchBoard($boardId: ID!) {
-    fetchBoard(boardId: $boardId){
+    fetchBoard(boardId: $boardId) {
       _id
       writer
       contents
@@ -15,61 +15,57 @@ const FEAT_BOARD = gql`
       createdAt
     }
   }
-`
+`;
 const DELETE_BOARD = gql`
   mutation deleteBoard($boardId: ID!) {
     deleteBoard(boardId: $boardId)
   }
-`
+`;
 
 export default function Boards() {
   const router = useRouter();
 
   const { data } = useQuery(FEAT_BOARD, {
     variables: {
-      boardId: router.query.boardId
-    }
+      boardId: router.query.boardId,
+    },
   });
   console.log(data);
 
   const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const onClickEdit = (e: React.MouseEvent) => {
-    router.push(`${router.query.boardId}/edit`)
-  }
+    router.push(`${router.query.boardId}/edit`);
+  };
   const onClickDelete = async () => {
     const deleteB = await deleteBoard({
       variables: {
-        boardId: router.query.boardId
-      }
-    })
+        boardId: router.query.boardId,
+      },
+    });
     console.log(deleteB);
-    alert('목록 삭제가 완료되었습니다!');
-    router.push('/boards')
-  }
+    alert("목록 삭제가 완료되었습니다!");
+    router.push("/boards");
+  };
   const moveToList = () => {
-    router.push('/boards')
-  }
+    router.push("/boards");
+  };
   return (
     <S.Container>
       <S.Doc>
         <S.DocBorder>
           <S.HeaderContainer>
-            <Image src={profileIcon}/>
+            <Image src={profileIcon} />
             <S.Profile>
               <S.Title>{data?.fetchBoard.writer}</S.Title>
               <S.CreateDate>{data?.fetchBoard.createdAt}</S.CreateDate>
             </S.Profile>
           </S.HeaderContainer>
           <S.Contents>
-            <S.Text>
-              {data?.fetchBoard.title}
-            </S.Text>
+            <S.Text>{data?.fetchBoard.title}</S.Text>
           </S.Contents>
           <S.ContentsText>
-            <S.content>
-              {data?.fetchBoard.contents}
-            </S.content>
+            <S.content>{data?.fetchBoard.contents}</S.content>
           </S.ContentsText>
         </S.DocBorder>
       </S.Doc>
@@ -81,5 +77,5 @@ export default function Boards() {
         </S.buttons>
       </S.ContainterButtons>
     </S.Container>
-  )
+  );
 }
