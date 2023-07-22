@@ -243,7 +243,7 @@ export default function index(props: Props) {
             <S.Tag2>
               <S.Text>주소</S.Text>
               <S.SectionAdd>
-                <S.Inputed5
+                <S.Inputed5 // value가 있으면 default value 무시
                   placeholder="07250"
                   readOnly
                   value={
@@ -264,7 +264,7 @@ export default function index(props: Props) {
                     address !== ""
                       ? address
                       : data?.fetchBoard.boardAddress?.address ?? "" // ?? 는 null 또는 undefined일 경우 "" 으로 값을 대체함
-                  }
+                  } // value는 바꿀 수 없고 default value는 바꿀 수 있다.
                 />
               </S.Tag2>
               <S.Tag2>
@@ -281,7 +281,11 @@ export default function index(props: Props) {
           <S.TextDiv>
             <S.Tag2>
               <S.Text>유튜브</S.Text>
-              <S.Inputed2 type="text" placeholder="링크를 복사해주세요." />
+              <S.Inputed2
+                type="text"
+                placeholder="링크를 복사해주세요."
+                onChange={onChangeYoutubeUrl}
+              />
             </S.Tag2>
           </S.TextDiv>
           <S.TextDiv3>

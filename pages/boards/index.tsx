@@ -26,7 +26,7 @@ export default function index() {
   const router = useRouter();
   const { data } = useQuery(SEARCH);
 
-  const moveToBoard = (e) => {
+  const moveToBoard = (e: any) => {
     router.push(`/boards/${e.target.id}`);
   };
   const moveToMain = () => {

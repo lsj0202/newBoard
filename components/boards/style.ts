@@ -186,3 +186,10 @@ export const Error = styled.div`
 export const AddressModal = styled(Modal)``; // 라이브러리 이모션으로 감싸기
 
 export const AddressSearchInput = styled(DaumPostcode)``; // 라이브러리 이모션으로 감싸기
+
+export const Youtube = styled.input`
+  width: 996px;
+  height: 52px;
+  padding-left: 16px;
+  border: 1px solid #bdbdbd;
+`;
