@@ -64,13 +64,12 @@ export const Date = styled.td`
 export const Body = styled.tbody``;
 
 export const NewBoard = styled.div`
-  margin-top: 30px;
-  margin-bottom: 50px;
   width: 170px;
   height: 40px;
   border: 1px solid silver;
   border-radius: 8px;
   display: flex;
+  margin-bottom: 10px;
   padding-left: 10px;
   &:hover {
     background-color: #ffd400;
@@ -86,4 +85,11 @@ export const Registration = styled.div`
   justify-content: center;
   font-weight: 700;
   margin-bottom: 50px;
+`;
+
+export const Div = styled.div`
+  display: flex;
+  height: 120px;
+  align-items: center;
+  justify-content: space-between;
 `;

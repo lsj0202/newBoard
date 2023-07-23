@@ -54,10 +54,15 @@ export default function index() {
             </S.ContainerBody>
           ))}
         </S.Body>
-        <S.NewBoard>
-          <Image src={Pen} alt="" />
-          <S.Registration onClick={moveToMain}>게시글 등록하기</S.Registration>
-        </S.NewBoard>
+        <S.Div>
+          <div>sdf</div>
+          <S.NewBoard>
+            <Image src={Pen} alt="" />
+            <S.Registration onClick={moveToMain}>
+              게시글 등록하기
+            </S.Registration>
+          </S.NewBoard>
+        </S.Div>
       </S.Table>
     </>
   );
