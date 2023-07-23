@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 export const Table = styled.table`
   width: 70%;
-  height: 600px;
+  height: 630px;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 50px;
 `;
 export const Container = styled.tr`
   width: 100%;
@@ -65,6 +65,7 @@ export const Body = styled.tbody``;
 
 export const NewBoard = styled.div`
   margin-top: 30px;
+  margin-bottom: 50px;
   width: 170px;
   height: 40px;
   border: 1px solid silver;
@@ -84,4 +85,5 @@ export const Registration = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  margin-bottom: 50px;
 `;
