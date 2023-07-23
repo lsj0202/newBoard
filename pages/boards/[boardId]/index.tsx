@@ -64,7 +64,7 @@ export default function Boards() {
     router.push("/boards").then(() => router.reload());
   };
   return (
-    <S.Container>
+    <S.Container id="container">
       <S.Doc>
         <S.DocBorder>
           <S.HeaderContainer>

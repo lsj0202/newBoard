@@ -1,11 +1,11 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 export const Table = styled.table`
   width: 70%;
   height: 600px;
   margin: 0 auto;
   margin-top: 80px;
-`
+`;
 export const Container = styled.tr`
   width: 100%;
   height: 50px;
@@ -14,7 +14,7 @@ export const Container = styled.tr`
   border-bottom: 1px solid black;
   display: flex;
   align-items: center;
-`
+`;
 
 export const ContainerBody = styled.tr`
   width: 100%;
@@ -24,11 +24,11 @@ export const ContainerBody = styled.tr`
   border-bottom: 1px solid black;
   display: flex;
   align-items: center;
-  &:hover{
+  &:hover {
     color: blue;
     cursor: pointer;
   }
-`
+`;
 export const Number = styled.td`
   width: 7%;
   height: 50px;
@@ -36,7 +36,7 @@ export const Number = styled.td`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-`
+`;
 export const Title = styled.td`
   width: 51%;
   height: 50px;
@@ -44,7 +44,7 @@ export const Title = styled.td`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-`
+`;
 export const Writer = styled.td`
   width: 35%;
   height: 50px;
@@ -52,7 +52,7 @@ export const Writer = styled.td`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-`
+`;
 export const Date = styled.td`
   width: 12%;
   height: 50px;
@@ -60,10 +60,8 @@ export const Date = styled.td`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-`
-export const Body = styled.tbody`
-
-`
+`;
+export const Body = styled.tbody``;
 
 export const NewBoard = styled.div`
   margin-top: 30px;
@@ -73,12 +71,12 @@ export const NewBoard = styled.div`
   border-radius: 8px;
   display: flex;
   padding-left: 10px;
-  &:hover{
-    background-color: #FFD400;
+  &:hover {
+    background-color: #ffd400;
     cursor: pointer;
     border: none;
   }
-`
+`;
 export const Registration = styled.div`
   width: 150px;
   height: 40px;
@@ -86,4 +84,4 @@ export const Registration = styled.div`
   align-items: center;
   justify-content: center;
   font-weight: 700;
-`
+`;

@@ -67,6 +67,17 @@ const index = () => {
 
   const onClickWrite = async (): Promise<void> => {
     try {
+      if (writer.length == 0) {
+        alert("작성자를 입력해주세요.");
+        return;
+      } else if (password.length == 0) {
+        alert("비밀번호를 입력해주세요.");
+        return;
+      } else if (contents.trim().length < 5) {
+        alert("내용을 다섯 글자 이상 입력하세요.");
+        return;
+      }
+
       if (typeof router.query.boardId !== "string") {
         alert("시스템에 문제가 있습니다.");
         return;

@@ -189,150 +189,148 @@ export default function index(props: Props) {
   };
 
   return (
-    <>
+    <S.Container>
       {isOpen && (
         <S.AddressModal visible={true}>
           <S.AddressSearchInput onComplete={onCompleteAddressSearch} />
         </S.AddressModal>
       )}
-      <S.Container>
-        <S.Doc>
-          <S.TitleDiv>게시물 {props.isEdit ? "수정" : "등록"}</S.TitleDiv>
-          <S.WriteDiv>
-            <S.Tag>
-              <S.Text>작성자</S.Text>
-              <S.Inputed
-                type="text"
-                placeholder="이름을 작성해주세요."
-                onChange={onChangeWriter}
-                defaultValue={data?.fetchBoard.writer}
+      <S.Doc>
+        <S.TitleDiv>게시물 {props.isEdit ? "수정" : "등록"}</S.TitleDiv>
+        <S.WriteDiv>
+          <S.Tag>
+            <S.Text>작성자</S.Text>
+            <S.Inputed
+              type="text"
+              placeholder="이름을 작성해주세요."
+              onChange={onChangeWriter}
+              defaultValue={data?.fetchBoard.writer}
+            />
+            <S.ErrorMessage>{writerError}</S.ErrorMessage>
+          </S.Tag>
+          <S.Tag>
+            <S.Text>비밀번호</S.Text>
+            <S.Inputed
+              type="password"
+              placeholder="비밀번호를 작성해주세요."
+              onChange={onChangePassword}
+              defaultValue={data?.fetchBoard.password}
+            />
+            <S.ErrorMessage>{passwordError}</S.ErrorMessage>
+          </S.Tag>
+        </S.WriteDiv>
+        <S.TextDiv>
+          <S.Tag2>
+            <S.Text>제목</S.Text>
+            <S.Inputed2
+              type="text"
+              placeholder="제목을 작성해주세요."
+              onChange={onChangeTitle}
+              defaultValue={data?.fetchBoard.title}
+            />
+            <S.ErrorMessage>{titleError}</S.ErrorMessage>
+          </S.Tag2>
+        </S.TextDiv>
+        <S.TextDiv2>
+          <S.Tag2>
+            <S.Text>내용</S.Text>
+            <S.Inputed3
+              placeholder="내용을 작성해주세요."
+              onChange={onChangeContents}
+              defaultValue={data?.fetchBoard.contents}
+            />
+            <S.ErrorMessage>{contentsError}</S.ErrorMessage>
+          </S.Tag2>
+        </S.TextDiv2>
+        <S.AddressDiv>
+          <S.Tag2>
+            <S.Text>주소</S.Text>
+            <S.SectionAdd>
+              <S.Inputed5 // value가 있으면 default value 무시
+                placeholder="07250"
+                readOnly
+                value={
+                  zipcode !== ""
+                    ? zipcode
+                    : data?.fetchBoard.boardAddress?.zipcode ?? ""
+                }
               />
-              <S.ErrorMessage>{writerError}</S.ErrorMessage>
-            </S.Tag>
-            <S.Tag>
-              <S.Text>비밀번호</S.Text>
-              <S.Inputed
-                type="password"
-                placeholder="비밀번호를 작성해주세요."
-                onChange={onChangePassword}
-                defaultValue={data?.fetchBoard.password}
-              />
-              <S.ErrorMessage>{passwordError}</S.ErrorMessage>
-            </S.Tag>
-          </S.WriteDiv>
-          <S.TextDiv>
+              <S.BtnBlack onClick={onClickAddressSearch}>
+                우편번호 검색
+              </S.BtnBlack>
+            </S.SectionAdd>
             <S.Tag2>
-              <S.Text>제목</S.Text>
               <S.Inputed2
                 type="text"
-                placeholder="제목을 작성해주세요."
-                onChange={onChangeTitle}
-                defaultValue={data?.fetchBoard.title}
+                readOnly
+                value={
+                  address !== ""
+                    ? address
+                    : data?.fetchBoard.boardAddress?.address ?? "" // ?? 는 null 또는 undefined일 경우 "" 으로 값을 대체함
+                } // value는 바꿀 수 없고 default value는 바꿀 수 있다.
               />
-              <S.ErrorMessage>{titleError}</S.ErrorMessage>
             </S.Tag2>
-          </S.TextDiv>
-          <S.TextDiv2>
             <S.Tag2>
-              <S.Text>내용</S.Text>
-              <S.Inputed3
-                placeholder="내용을 작성해주세요."
-                onChange={onChangeContents}
-                defaultValue={data?.fetchBoard.contents}
-              />
-              <S.ErrorMessage>{contentsError}</S.ErrorMessage>
-            </S.Tag2>
-          </S.TextDiv2>
-          <S.AddressDiv>
-            <S.Tag2>
-              <S.Text>주소</S.Text>
-              <S.SectionAdd>
-                <S.Inputed5 // value가 있으면 default value 무시
-                  placeholder="07250"
-                  readOnly
-                  value={
-                    zipcode !== ""
-                      ? zipcode
-                      : data?.fetchBoard.boardAddress?.zipcode ?? ""
-                  }
-                />
-                <S.BtnBlack onClick={onClickAddressSearch}>
-                  우편번호 검색
-                </S.BtnBlack>
-              </S.SectionAdd>
-              <S.Tag2>
-                <S.Inputed2
-                  type="text"
-                  readOnly
-                  value={
-                    address !== ""
-                      ? address
-                      : data?.fetchBoard.boardAddress?.address ?? "" // ?? 는 null 또는 undefined일 경우 "" 으로 값을 대체함
-                  } // value는 바꿀 수 없고 default value는 바꿀 수 있다.
-                />
-              </S.Tag2>
-              <S.Tag2>
-                <S.Inputed2
-                  type="text"
-                  onChange={onChangeAddressDetail}
-                  defaultValue={
-                    data?.fetchBoard.boardAddress?.addressDetail ?? ""
-                  }
-                />
-              </S.Tag2>
-            </S.Tag2>
-          </S.AddressDiv>
-          <S.TextDiv>
-            <S.Tag2>
-              <S.Text>유튜브</S.Text>
               <S.Inputed2
                 type="text"
-                placeholder="링크를 복사해주세요."
-                onChange={onChangeYoutubeUrl}
+                onChange={onChangeAddressDetail}
+                defaultValue={
+                  data?.fetchBoard.boardAddress?.addressDetail ?? ""
+                }
               />
             </S.Tag2>
-          </S.TextDiv>
-          <S.TextDiv3>
-            <S.Tag2>
-              <S.Text>사진첨부</S.Text>
-              <S.Pictures>
-                <S.Picture>
-                  <S.Plus>+</S.Plus>
-                  <S.Upload>upload</S.Upload>
-                </S.Picture>
+          </S.Tag2>
+        </S.AddressDiv>
+        <S.TextDiv>
+          <S.Tag2>
+            <S.Text>유튜브</S.Text>
+            <S.Inputed2
+              type="text"
+              placeholder="링크를 복사해주세요."
+              onChange={onChangeYoutubeUrl}
+            />
+          </S.Tag2>
+        </S.TextDiv>
+        <S.TextDiv3>
+          <S.Tag2>
+            <S.Text>사진첨부</S.Text>
+            <S.Pictures>
+              <S.Picture>
+                <S.Plus>+</S.Plus>
+                <S.Upload>upload</S.Upload>
+              </S.Picture>
 
-                <S.Picture>
-                  <S.Plus>+</S.Plus>
-                  <S.Upload>upload</S.Upload>
-                </S.Picture>
+              <S.Picture>
+                <S.Plus>+</S.Plus>
+                <S.Upload>upload</S.Upload>
+              </S.Picture>
 
-                <S.Picture>
-                  <S.Plus>+</S.Plus>
-                  <S.Upload>upload</S.Upload>
-                </S.Picture>
-              </S.Pictures>
-            </S.Tag2>
-          </S.TextDiv3>
-          <S.TextDiv3>
-            <S.Tag2>
-              <S.Text>메인설정</S.Text>
-              <S.SectionAdded>
-                <S.Log>
-                  <S.Inputs type="radio" name="btn" />
-                  유튜브
-                </S.Log>
+              <S.Picture>
+                <S.Plus>+</S.Plus>
+                <S.Upload>upload</S.Upload>
+              </S.Picture>
+            </S.Pictures>
+          </S.Tag2>
+        </S.TextDiv3>
+        <S.TextDiv3>
+          <S.Tag2>
+            <S.Text>메인설정</S.Text>
+            <S.SectionAdded>
+              <S.Log>
                 <S.Inputs type="radio" name="btn" />
-                사진
-              </S.SectionAdded>
-            </S.Tag2>
-          </S.TextDiv3>
-          <S.TextDiv2>
-            <S.Complete onClick={props.isEdit ? onClickEdit : onClickSubmit}>
-              {props.isEdit ? "수정" : "등록"}하기
-            </S.Complete>
-          </S.TextDiv2>
-        </S.Doc>
-      </S.Container>
-    </>
+                유튜브
+              </S.Log>
+              <S.Inputs type="radio" name="btn" />
+              사진
+            </S.SectionAdded>
+          </S.Tag2>
+        </S.TextDiv3>
+        <S.TextDiv2>
+          <S.Complete onClick={props.isEdit ? onClickEdit : onClickSubmit}>
+            {props.isEdit ? "수정" : "등록"}하기
+          </S.Complete>
+        </S.TextDiv2>
+      </S.Doc>
+    </S.Container>
   );
 }

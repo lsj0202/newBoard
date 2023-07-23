@@ -2,11 +2,12 @@ import styled from "@emotion/styled";
 import ReactPlayer from "react-player";
 
 export const Container = styled.div`
+  margin-top: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 205vh;
+  height: auto;
   display: flex;
   flex-direction: column;
 `;

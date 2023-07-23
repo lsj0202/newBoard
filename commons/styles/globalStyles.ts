@@ -8,6 +8,11 @@ export const globalStyles = css`
     list-style: none;
     font-size: 20px;
     font-weight: 400;
-    font-family: "Nanum Pen Script", cursive;
+    font-family: "myFont";
+  }
+
+  @font-face {
+    font-family: "myFont";
+    src: url("/fonts/NanumPenScript-Regular.ttf");
   }
 `;
