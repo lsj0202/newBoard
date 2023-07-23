@@ -2,7 +2,6 @@ import * as S from "./style";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import { TextChange } from "typescript";
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -35,6 +34,11 @@ export const FETCH_BOARD = gql`
       title
       contents
       createdAt
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

@@ -7,7 +7,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 200vh;
 `;
 export const Doc = styled.div`
   width: 60%;

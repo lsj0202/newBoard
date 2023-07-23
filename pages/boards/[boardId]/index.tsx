@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import * as S from "./style";
 import Image from "next/image";
 import profileIcon from "../../images/profile.svg";
@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { Tooltip } from "antd";
 import Links from "../../images/board/detail/link.png";
 import Locations from "../../images/board/detail/location.png";
+import BoardCommentWrite from "../../../components/boards/write";
+import BoardCommentList from "../../../components/boards/list";
 
 const FEAT_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -66,7 +68,7 @@ export default function Boards() {
       <S.Doc>
         <S.DocBorder>
           <S.HeaderContainer>
-            <Image src={profileIcon} />
+            <Image src={profileIcon} alt="" />
             <S.Profile>
               <S.Title>{data?.fetchBoard.writer}</S.Title>
               <S.CreateDate>{data?.fetchBoard.createdAt}</S.CreateDate>
@@ -76,7 +78,9 @@ export default function Boards() {
 
               <Tooltip
                 placement="topRight"
-                title={data?.fetchBoard.boardAddress?.address ?? ""}
+                title={`${data?.fetchBoard.boardAddress?.address ?? ""} ${
+                  data?.fetchBoard.boardAddress?.addressDetail ?? ""
+                }`}
               >
                 <Image src={Locations} alt="" />
               </Tooltip>
@@ -88,9 +92,18 @@ export default function Boards() {
 
           <S.ContentsText>
             <S.content>{data?.fetchBoard.contents}</S.content>
+            {data?.fetchBoard.youtubeUrl !== "" && (
+              <S.Youtube
+                url={data?.fetchBoard.youtubeUrl ?? ""}
+                width="486px"
+                height="240px"
+              />
+            )}
           </S.ContentsText>
         </S.DocBorder>
       </S.Doc>
+      <BoardCommentWrite />
+      <BoardCommentList />
       <S.ContainterButtons>
         <S.buttons>
           <S.button onClick={moveToList}>목록으로</S.button>

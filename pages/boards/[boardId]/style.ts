@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
+import ReactPlayer from "react-player";
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 150vh;
+  height: 205vh;
   display: flex;
   flex-direction: column;
 `;
@@ -93,4 +94,9 @@ export const button = styled.div`
 export const LeftBox = styled.div`
   display: flex;
   margin-left: 45%;
+`;
+
+export const Youtube = styled(ReactPlayer)`
+  // 리액트 영상 라이브러리
+  margin: auto;
 `;
