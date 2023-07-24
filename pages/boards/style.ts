@@ -96,6 +96,8 @@ export const Div = styled.div`
 
 export const Spand = styled.span`
   cursor: pointer;
+  width: 30px;
+  height: 30px;
   &:hover {
     color: purple;
   }
