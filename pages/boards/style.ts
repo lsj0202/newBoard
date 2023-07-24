@@ -93,3 +93,10 @@ export const Div = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const Spand = styled.span`
+  cursor: pointer;
+  &:hover {
+    color: purple;
+  }
+`;

@@ -40,6 +40,7 @@ export default function Boards() {
 
   const { data } = useQuery(FEAT_BOARD, {
     variables: {
+      // 데이터 연결받기
       boardId: router.query.boardId,
     },
   });
