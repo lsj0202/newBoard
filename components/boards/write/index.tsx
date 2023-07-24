@@ -44,7 +44,11 @@ export const FETCH_BOARD_COMMENTS = gql`
   }
 `;
 
-const index = () => {
+interface WriteProps {
+  isEdit: boolean;
+}
+
+const index: React.FC<WriteProps> = ({ isEdit }) => {
   const router = useRouter();
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
@@ -113,7 +117,7 @@ const index = () => {
     <S.Wrapper>
       <S.Flex>
         <Image src={pencil} alt="" />
-        <span>댓글</span>
+        {isEdit ? <span>댓글 수정</span> : <span>댓글</span>}
       </S.Flex>
       <S.InputWrapper>
         <S.Input
@@ -138,7 +142,9 @@ const index = () => {
         />
         <S.BottomWrapper>
           <S.ContentsLength>{contents.length}/100</S.ContentsLength>
-          <S.Button onClick={onClickWrite}>등록하기</S.Button>
+          <S.Button onClick={onClickWrite}>
+            {isEdit ? <span>수정하기</span> : <span>등록하기</span>}
+          </S.Button>
         </S.BottomWrapper>
       </S.ContentsWrapper>
     </S.Wrapper>

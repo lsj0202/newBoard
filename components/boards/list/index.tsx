@@ -6,6 +6,7 @@ import Image from "next/image";
 import Avartar from "../../../pages/images/profile.svg";
 import Update from "../../../pages/images/board/list/option_update_icon.png";
 import Delete from "../../../pages/images/board/list/option_delete_icon.png";
+import Write from "../write";
 
 export const FETCH_BOARD_COMMENTS = gql`
   query fetchBoardComments($boardId: ID!) {
@@ -40,6 +41,7 @@ const index = () => {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [boardCommentId, setBoardCommentId] = useState("");
   const [password, setPassword] = useState("");
+  const [isEdit, setIsEdit] = useState(false);
 
   const [deleteBoardComment] = useMutation(DELETE_BOARD_COMMENT);
 
@@ -50,7 +52,6 @@ const index = () => {
   const onClickDelete = async (
     event: MouseEvent<HTMLButtonElement>
   ): Promise<void> => {
-    // const password = prompt("비밀번호를 입력하세요.");
     try {
       await deleteBoardComment({
         variables: {
@@ -92,30 +93,44 @@ const index = () => {
         </S.PasswordModal>
       )}
       {data?.fetchBoardComments.map((el: any) => (
-        <S.ItemWrapper key={el._id}>
-          <S.FlexWrapper>
-            <Image src={Avartar} alt="" />
-            <S.MainWrapper>
-              <S.WriterWrapper>
-                <S.Writer>{el.writer}</S.Writer>
-                <S.Star value={el.rating} disabled />
-              </S.WriterWrapper>
-              <S.Contents>{el.contents}</S.Contents>
-            </S.MainWrapper>
-            <S.OptionWrapper>
-              <Image src={Update} alt="" width={40} height={10} />
-              <Image
-                id={el._id}
-                src={Delete}
-                alt=""
-                onClick={onClickOpenDeleteModal}
-                width={40}
-                height={10}
-              />
-            </S.OptionWrapper>
-          </S.FlexWrapper>
-          <S.DateString>{getDate(el?.createdAt)}</S.DateString>
-        </S.ItemWrapper>
+        <>
+          {isEdit ? (
+            <Write isEdit={isEdit} />
+          ) : (
+            <S.ItemWrapper key={el._id}>
+              <S.FlexWrapper>
+                <Image src={Avartar} alt="" />
+                <S.MainWrapper>
+                  <S.WriterWrapper>
+                    <S.Writer>{el.writer}</S.Writer>
+                    <S.Star value={el.rating} disabled />
+                  </S.WriterWrapper>
+                  <S.Contents>{el.contents}</S.Contents>
+                </S.MainWrapper>
+                <S.OptionWrapper>
+                  <Image
+                    src={Update}
+                    alt=""
+                    width={40}
+                    height={10}
+                    onClick={() => {
+                      setIsEdit(!isEdit);
+                    }}
+                  />
+                  <Image
+                    id={el._id}
+                    src={Delete}
+                    alt=""
+                    onClick={onClickOpenDeleteModal}
+                    width={40}
+                    height={10}
+                  />
+                </S.OptionWrapper>
+              </S.FlexWrapper>
+              <S.DateString>{getDate(el?.createdAt)}</S.DateString>
+            </S.ItemWrapper>
+          )}
+        </>
       ))}
     </div>
   );
